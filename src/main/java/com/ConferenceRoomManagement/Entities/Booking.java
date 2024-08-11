@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Table;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Bookings")
@@ -21,13 +20,14 @@ public class Booking {
     @Column(name = "booking_id")
     private int bookingId;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
-    private Room room;
+    @Column(name = "room_id", nullable = false)
+    private int roomId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    private int userId;
+    
+    @Column(name = "booking_date", nullable = false)
+    private LocalDate bookingDate;
 
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
@@ -46,12 +46,13 @@ public class Booking {
 
 	public Booking() {}
 
-	public Booking(int bookingId, Room room, User user, LocalDateTime startTime, LocalDateTime endTime,
+	public Booking(int bookingId, int roomId, int userId, LocalDate bookingDate, LocalDateTime startTime, LocalDateTime endTime,
 			BookingStatus status) {
 		super();
 		this.bookingId = bookingId;
-		this.room = room;
-		this.user = user;
+		this.roomId = roomId;
+		this.userId = userId;
+		this.bookingDate = bookingDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.status = status;
@@ -64,21 +65,29 @@ public class Booking {
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-
-	public Room getRoom() {
-		return room;
+	
+	public int getRoomId() {
+		return roomId;
 	}
 
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public LocalDateTime getStartTime() {

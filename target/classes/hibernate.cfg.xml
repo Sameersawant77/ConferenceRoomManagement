@@ -15,6 +15,9 @@
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="com.ConferenceRoomManagement.Entities.User"/>
+        <mapping class="com.ConferenceRoomManagement.Entities.Room"/>
+		<mapping class="com.ConferenceRoomManagement.Entities.Booking"/>
+		<mapping class="com.ConferenceRoomManagement.Entities.User"/>
+
     </session-factory>
 </hibernate-configuration>
