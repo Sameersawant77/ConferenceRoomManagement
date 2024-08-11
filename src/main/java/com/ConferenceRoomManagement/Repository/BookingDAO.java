@@ -9,6 +9,7 @@ import com.ConferenceRoomManagement.Entities.Booking;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 public class BookingDAO {
 
@@ -61,6 +62,16 @@ public class BookingDAO {
             query.setParameter("date", date);
 
             return query.uniqueResult();
+        }
+    }
+    
+    public List<Booking> getUserBookingsForDate(int userId, LocalDate date) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Booking b WHERE b.userId = :userId AND b.bookingDate = :date";
+            Query<Booking> query = session.createQuery(hql, Booking.class);
+            query.setParameter("userId", userId);
+            query.setParameter("date", date);
+            return query.list();
         }
     }
 }

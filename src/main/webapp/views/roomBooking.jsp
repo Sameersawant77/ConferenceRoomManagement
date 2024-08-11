@@ -22,6 +22,9 @@
         <label for="userId">User ID:</label>
         <input type="text" id="userId" name="userId" required /><br><br>
         
+        <label for="email">Email:</label>
+    	<input type="email" id="email" name="email" required /><br><br>
+        
         <label for="bookingDate">Date of Booking:</label>
         <input type="date" id="bookingDate" name="bookingDate" required /><br><br>
 
