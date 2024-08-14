@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,16 +12,20 @@
 </head>
 <body>
 	<%
-		String user =(String)session.getAttribute("username");
+	String user = (String) session.getAttribute("username");
 	%>
 	<div class="showmenu" id="show">
 		<i class="fa fa-times" onclick="closemenu()" aria-hidden="true"
 			style="color: red; font-size: 30px; font-weight: 300; position: absolute; right: 2%;"></i>
 		<ul>
-			<li><a href="home">Home</a></li>
+			<!-- 	<li><a href="home">Home</a></li> -->
 			<li><a href="booking">Conference Room Booking</a></li>
 			<li><a href="list">Booking List</a></li>
-			<li><a href="showRoom">Room</a></li>
+			<% if ("admin".equals(user)) { %>
+				<li><a href="showRoom" class="active">Edit Rooms</a></li>
+			<% } %>
+			
+
 		</ul>
 	</div>
 	<div class="navbar">
@@ -29,17 +35,17 @@
 			</button>
 
 			<h2>Montran India</h2>
-			
-			
+
+
 			<%
 			if (user != null) {
-				out.print("<h2>Welcome "+user+" |<a href='LogoutServlet'>Logout</a></h2>");
-			
+				out.print("<h2>Welcome " + user + " |<a href='LogoutServlet'>Logout</a></h2>");
+
 			} else {
 				out.print("<h2><a href='views/login.jsp'>Login</a></h2>");
 			}
 			%>
-			
+
 
 		</nav>
 	</div>

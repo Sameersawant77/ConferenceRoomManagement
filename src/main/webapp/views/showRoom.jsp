@@ -3,6 +3,10 @@
 <%@ page
 	import="java.util.*,com.ConferenceRoomManagement.Entities.Room,com.ConferenceRoomManagement.Repository.RoomDAO"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<!--  NAVBAR  -->
+<%@ include file="/views/navbar.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,15 +15,23 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="CSS/roomrudPage.css">
+
+
 </head>
 <body>
 	<%
 	RoomDAO rd = new RoomDAO();
 	List<Room> room = rd.getRooms();
 	%>
+	
+	
+	
+	<!-- 
 	<div>
 		<a href="home"><i class="fa fa-rotate-left"> Back</i></a>
 	</div>
+	-->
+	
 	<div style="margin-top: 30px">
 		<button onclick="showaddform()">
 			<i class="fa fa-plus">Add Room</i>
