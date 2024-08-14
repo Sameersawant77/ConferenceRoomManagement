@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*,com.ConferenceRoomManagement.Entities.Room,com.ConferenceRoomManagement.Repository.RoomDAO" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page
+	import="java.util.*,com.ConferenceRoomManagement.Entities.Room,com.ConferenceRoomManagement.Repository.RoomDAO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="CSS/roomrudPage.css">
+<link rel="stylesheet" href="CSS/roomrudPage.css">
 </head>
 <body>
-	<%RoomDAO rd = new RoomDAO();
-	List<Room> room = rd.getRooms();%>
+	<%
+	RoomDAO rd = new RoomDAO();
+	List<Room> room = rd.getRooms();
+	%>
 	<div>
 		<a href="home"><i class="fa fa-rotate-left"> Back</i></a>
 	</div>
@@ -32,17 +35,25 @@
 				<td>Edit</td>
 				<td>delete</td>
 			</tr>
-			
+
 			<c:forEach var="room" items="${rooms}">
-			<tr>
-				<td>${room.roomId}</td>
-				<td>${room.roomName}</td>
-				<td>${room.capacity}</td>
-				<td>${room.status}</td>
-				<td><form method="post" action="RoomServlet"><input type="hidden" name="action" value="update"><input type="hidden" name="id" value="${room.roomId}"><input type="submit" value="edit"></form></td>
-				<td><form method="post" action="RoomCrudServlet"><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${room.roomId}"><input type="submit" value="delete"></form></td>
-			</tr>
-            </c:forEach>
+				<tr>
+					<td>${room.roomId}</td>
+					<td>${room.roomName}</td>
+					<td>${room.capacity}</td>
+					<td>${room.status}</td>
+					<td><form method="post" action="RoomServlet">
+							<input type="hidden" name="action" value="update"><input
+								type="hidden" name="id" value="${room.roomId}"><input
+								type="submit" value="edit">
+						</form></td>
+					<td><form method="post" action="RoomCrudServlet">
+							<input type="hidden" name="action" value="delete"><input
+								type="hidden" name="id" value="${room.roomId}"><input
+								type="submit" value="delete">
+						</form></td>
+				</tr>
+			</c:forEach>
 
 		</table>
 	</div>
@@ -80,14 +91,14 @@
 			</form>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<script>
 		function showaddform() {
 			var form = document.getElementById("form").style;
 			form.display = "block";
-			
+
 		}
 		function closeform() {
 			document.getElementById("form").style.display = "none";

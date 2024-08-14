@@ -6,9 +6,12 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel ="stylesheet" href="CSS/home.css">
+<link rel="stylesheet" href="CSS/home.css">
 </head>
 <body>
+	<%
+		String user =(String)session.getAttribute("username");
+	%>
 	<div class="showmenu" id="show">
 		<i class="fa fa-times" onclick="closemenu()" aria-hidden="true"
 			style="color: red; font-size: 30px; font-weight: 300; position: absolute; right: 2%;"></i>
@@ -24,8 +27,20 @@
 			<button onclick="showmenu()" class="nav-btn">
 				<i class="fa fa-bars"></i>
 			</button>
-			<h2>Montran Corporation India</h2>
-			<h3>-Logout</h3>
+
+			<h2>Montran India</h2>
+			
+			
+			<%
+			if (user != null) {
+				out.print("<h2>Welcome "+user+" |<a href='LogoutServlet'>Logout</a></h2>");
+			
+			} else {
+				out.print("<h2><a href='views/login.jsp'>Login</a></h2>");
+			}
+			%>
+			
+
 		</nav>
 	</div>
 	<div class="bodycontent">
