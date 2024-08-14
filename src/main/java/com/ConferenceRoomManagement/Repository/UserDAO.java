@@ -3,6 +3,7 @@ package com.ConferenceRoomManagement.Repository;
 import org.hibernate.Session;
 
 import com.ConferenceRoomManagement.Entities.User;
+import com.ConferenceRoomManagement.Utils.HibernateUtil;
 
 public class UserDAO {
 	public User getUserById(int userId) {

@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.ConferenceRoomManagement.Entities.Booking;
+import com.ConferenceRoomManagement.Utils.HibernateUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

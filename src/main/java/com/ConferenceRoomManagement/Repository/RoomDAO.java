@@ -4,6 +4,7 @@ package com.ConferenceRoomManagement.Repository;
 import java.util.List;
 import org.hibernate.Session;
 import com.ConferenceRoomManagement.Entities.Room;
+import com.ConferenceRoomManagement.Utils.HibernateUtil;
 
 
 public class RoomDAO {
