@@ -9,4 +9,54 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <!-- ALL SERVLET FILE -->
+
+	<servlet>
+		<servlet-name>roomBook</servlet-name>
+		<servlet-class>com.ConferenceRoomManagement.Services.RoomBookingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>roomBook</servlet-name>
+		<url-pattern>/roomBooking</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>showRoom</servlet-name>
+		<servlet-class>com.ConferenceRoomManagement.Services.RoomCrudServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showRoom</servlet-name>
+		<url-pattern>/showRoom</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>updateRoom</servlet-name>
+		<servlet-class>com.ConferenceRoomManagement.Services.RoomServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateRoom</servlet-name>
+		<url-pattern>/updateRoom</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- ALL JSP FILE -->
+	<servlet>
+		<servlet-name>homePage</servlet-name>
+		<jsp-file>/views/home.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>homePage</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>roomPage</servlet-name>
+		<jsp-file>/views/showRoom.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>roomPage</servlet-name>
+		<url-pattern>/roomPage</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

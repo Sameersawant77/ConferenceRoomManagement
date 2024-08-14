@@ -1,0 +1,84 @@
+@charset "ISO-8859-1";
+.table1, .table1 tr, .table1 td {
+	padding: 10px 60px;
+	border-collapse: collapse;
+	border: 1px solid rgb(150, 150, 150);
+}
+
+.table tr, .table td {
+	padding: 15px;
+	text-align: center;
+}
+
+.table2 tr, .table2 td {
+	padding: 10px;
+}
+
+#form, #form1 {
+	position: absolute;
+	top: 15%;
+	left: 30%;
+	width: 40%;
+	height: 60%;
+	background-color: rgb(255, 255, 255);
+	border: 2px solid rgb(236, 236, 236);
+	border-radius: 20px;
+	box-shadow: 5px 5px 3px rgb(211, 211, 211);
+	display: none;
+	padding: 3%;
+	z-index: 1;
+}
+
+#form h1, #form1 h1 {
+	margin: 0;
+}
+
+.btn {
+	padding: 10px;
+	font-weight: 700;
+	background-color: transparent;
+	border: 1px solid rgb(142, 142, 142);
+	transition: transform .5s;
+	z-index: 1;
+}
+
+.btn2 {
+	padding: 5px 10px;
+	margin-right: 10px;
+	margin-left: 15px;
+	background-color: rgb(128, 128, 219);
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+
+.btn:hover {
+	transform: scale(1.1);
+}
+
+.crossbtn {
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.fa-times {
+	color: red;
+	font-size: 25px;
+	font-weight: 100;
+}
+
+.table {
+	/* margin: 20%; */
+	font-weight: 700;
+	margin-left: 15%;
+	background-color: rgba(239, 239, 239, 0.8);
+}
+
+body {
+	background: url("back.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
