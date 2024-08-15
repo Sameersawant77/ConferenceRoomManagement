@@ -76,7 +76,7 @@
 	List<Room> room = rd.getRooms();
 	String user = (String) session.getAttribute("username");
 	String role = (String) session.getAttribute("role");
-	System.out.println(user + " " + role);
+	
 	%>
 	
 	<div>
