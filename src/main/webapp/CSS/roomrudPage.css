@@ -1,4 +1,6 @@
 @charset "ISO-8859-1";
+
+
 .table1, .table1 tr, .table1 td {
 	padding: 10px 60px;
 	border-collapse: collapse;
@@ -15,7 +17,7 @@
 }
 
 #form, #form1 {
-	position: absolute;
+	position: fixed;
 	top: 15%;
 	left: 30%;
 	width: 40%;
@@ -77,8 +79,54 @@
 	background-color: rgba(239, 239, 239, 0.8);
 }
 
-body {
-	background: url("back.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
+.img1 img {
+	height: 200px;
+	width: 250px;
+}
+.img1{
+	height: 200px;
+	width: 250px;
+}
+
+.img h2 {
+	margin: 0;
+	text-align: center;
+}
+
+.btn {
+	display: flex;
+	justify-content: space-around;
+}
+
+#btn1, #btn2 {
+	background-color: rgb(206, 206, 206);
+	color: black;
+	border: none;
+	padding: 5px;
+	width: 100px;
+	border-radius: 5px;
+}
+
+#btn1:hover, #btn2:hover {
+	background-color: green;
+	color: white;
+}
+
+.img {
+	border: 1px solid rgb(203, 203, 203);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px 5px rgb(229, 229, 229);
+	text-align: center;
+}
+
+.imagecontainer {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+	margin: 0 10%;
 }
