@@ -21,7 +21,7 @@
 			<!-- 	<li><a href="home">Home</a></li> -->
 			<li><a href="booking">Conference Room Booking</a></li>
 			<li><a href="list">Booking List</a></li>
-			<li><a href="showRoom" >Edit Rooms</a></li>
+			<li><a href="showRoom" >Rooms</a></li>
 			
 			
 
