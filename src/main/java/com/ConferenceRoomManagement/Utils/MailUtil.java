@@ -17,7 +17,7 @@ public class MailUtil {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
     private static final String SMTP_USERNAME = "sawantsameer666@gmail.com";
-    private static final String SMTP_PASSWORD = "rxhhzrlljelnowhe";
+    private static final String SMTP_PASSWORD = "";
     private static final String ADMIN_EMAIL = "sameersawant7770@gmail.com";
     
     public void sendConfirmationEmail(String recipientEmail, String roomName, String bookingDate, String bookedSlots) {
