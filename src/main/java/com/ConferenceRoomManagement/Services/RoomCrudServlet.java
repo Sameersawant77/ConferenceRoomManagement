@@ -61,7 +61,6 @@ public class RoomCrudServlet extends HttpServlet {
 		}
 		else if(action.equals("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
-			System.out.println(id);
 			rd.deleteRoom(id);
 			response.sendRedirect("showRoom");
 		}

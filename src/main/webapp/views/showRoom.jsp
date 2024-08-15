@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="ISO-8859-1">
-    <title>Conference Rooms</title>
+    <title>Conference Room Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -64,12 +64,12 @@
                                     <form method="post" action="RoomServlet" class="me-2">
                                         <input type="hidden" name="action" value="update">
                                         <input type="hidden" name="id" value="${room.roomId}">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" style="width: 150px" class="btn btn-secondary">Update</button>
                                     </form>
                                     <form method="post" action="RoomCrudServlet">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="id" value="${room.roomId}">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" style="width: 150px" class="btn btn-secondary">Delete</button>
                                     </form>
                                 </div>
                             </c:if>

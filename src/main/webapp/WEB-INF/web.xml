@@ -30,15 +30,6 @@
 		<servlet-name>showRoom</servlet-name>
 		<url-pattern>/showRoom</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>updateRoom</servlet-name>
-		<servlet-class>com.ConferenceRoomManagement.Services.RoomServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>updateRoom</servlet-name>
-		<url-pattern>/updateRoom</url-pattern>
-	</servlet-mapping>
 
 	<!-- ALL JSP FILE -->
 	<servlet>
@@ -57,6 +48,15 @@
 	<servlet-mapping>
 		<servlet-name>roomPage</servlet-name>
 		<url-pattern>/roomPage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>updateRoom</servlet-name>
+		<jsp-file>/views/updateRoom.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateRoom</servlet-name>
+		<url-pattern>/updateRoom</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

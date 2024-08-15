@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book a Room</title>
+    <title>Conference Room Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .time-slot-grid {
@@ -18,7 +18,7 @@
         }
     </style>
 </head>
-<body class="bg-secondary">
+<body class="bg-light">
 <%@ include file="/views/navbar.jsp" %>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow-lg" style="width: 100%; max-width: 700px;">
@@ -49,12 +49,12 @@
                         <div class="time-slot-grid">
                             <c:forEach var="hour" begin="10" end="17">
                                 <input type="checkbox" class="btn-check" id="slot${hour}" name="slots" value="${hour}:00-${hour + 1}:00" autocomplete="off">
-                                <label class="btn btn-outline-primary time-slot-btn" for="slot${hour}">${hour}:00 - ${hour + 1}:00</label>
+                                <label class="btn btn-outline-success time-slot-btn" for="slot${hour}">${hour}:00 - ${hour + 1}:00</label>
                             </c:forEach>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Book Now</button>
+                    <button type="submit" class="btn btn-secondary w-100">Book Now</button>
                 </form>
 
                 <c:if test="${not empty errorMessage}">
