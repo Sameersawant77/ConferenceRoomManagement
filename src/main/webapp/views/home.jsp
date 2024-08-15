@@ -21,9 +21,8 @@
 			<!-- 	<li><a href="home">Home</a></li> -->
 			<li><a href="booking">Conference Room Booking</a></li>
 			<li><a href="list">Booking List</a></li>
-			<% if ("admin".equals(user)) { %>
-				<li><a href="showRoom" class="active">Edit Rooms</a></li>
-			<% } %>
+			<li><a href="showRoom" >Edit Rooms</a></li>
+			
 			
 
 		</ul>
