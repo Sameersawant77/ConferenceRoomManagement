@@ -43,7 +43,6 @@ public class RoomServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println(id);
 		RoomDAO rd = new RoomDAO();
 		Room r = rd.getRoomById(id);
 		out.println("<div id=\"form1\">\r\n"

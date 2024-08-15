@@ -41,20 +41,13 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("userId",user.getUserId());
 			session.setAttribute("username",user.getUsername());
 			session.setAttribute("role",user.getRole().toString());
-			
-//			out.print("Welcome "+user.getUsername()+"-"+user.getRole());
-			
-		RequestDispatcher rd = request.getRequestDispatcher("/home");
-		rd.forward(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("/home");
+			rd.forward(request, response);
 		}else {
-			out.print("Login failed");
-			
-		}
-		
-		
-		
-		
-		
+			request.setAttribute("errorMessage", "Invalid credentials. Please try again.");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+			rd.forward(request, response);
+		}	
 	}
 
 	

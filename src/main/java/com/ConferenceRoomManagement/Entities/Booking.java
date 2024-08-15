@@ -26,7 +26,10 @@ public class Booking {
     @Column(name = "user_id", nullable = false)
     private int userId;
     
-    @Column(name = "booking_date", nullable = false)
+    @Column(name = "email", nullable = false)
+    private String email;
+
+	@Column(name = "booking_date", nullable = false)
     private LocalDate bookingDate;
 
     @Column(name = "start_time", nullable = false)
@@ -46,12 +49,13 @@ public class Booking {
 
 	public Booking() {}
 
-	public Booking(int bookingId, int roomId, int userId, LocalDate bookingDate, LocalDateTime startTime, LocalDateTime endTime,
+	public Booking(int bookingId, int roomId, int userId, String email, LocalDate bookingDate, LocalDateTime startTime, LocalDateTime endTime,
 			BookingStatus status) {
 		super();
 		this.bookingId = bookingId;
 		this.roomId = roomId;
 		this.userId = userId;
+		this.email = email;
 		this.bookingDate = bookingDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -80,6 +84,14 @@ public class Booking {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public LocalDate getBookingDate() {

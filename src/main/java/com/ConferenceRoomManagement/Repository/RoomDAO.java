@@ -18,6 +18,15 @@ public class RoomDAO {
             return session.createQuery("FROM Room", Room.class).list();
         }
     }
+    
+    public List<Room> getActiveRooms() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Room WHERE status = :status", Room.class)
+                          .setParameter("status", RoomStatus.active)
+                          .list();
+        }
+    }
+
 
     public Room getRoomById(int roomId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

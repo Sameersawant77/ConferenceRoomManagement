@@ -6,16 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +20,7 @@ import com.ConferenceRoomManagement.Entities.User;
 import com.ConferenceRoomManagement.Repository.BookingDAO;
 import com.ConferenceRoomManagement.Repository.RoomDAO;
 import com.ConferenceRoomManagement.Repository.UserDAO;
+import com.ConferenceRoomManagement.Utils.MailUtil;
 
 @WebServlet("/RoomBookingServlet")
 public class RoomBookingServlet extends HttpServlet {
@@ -36,16 +29,16 @@ public class RoomBookingServlet extends HttpServlet {
     private RoomDAO roomDAO = new RoomDAO();
     private BookingDAO bookingDAO = new BookingDAO();
     private UserDAO userDAO = new UserDAO();
-
+    MailUtil mailUtil = new MailUtil();
     
     public RoomBookingServlet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Room> rooms = roomDAO.getRooms();
+        List<Room> rooms = roomDAO.getActiveRooms();
         request.setAttribute("rooms", rooms);
-        request.getRequestDispatcher("/views/roomBooking.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/bookRoom.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,14 +46,16 @@ public class RoomBookingServlet extends HttpServlet {
         String roomIdStr = request.getParameter("room");
         String[] selectedSlots = request.getParameterValues("slots");
         String email = request.getParameter("email");
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        int userId = (int) request.getSession().getAttribute("userId");
 
         if (bookingDateStr == null || roomIdStr == null || selectedSlots == null || email == null) {
-        	request.getRequestDispatcher("/views/roomBooking.jsp").include(request, response);
+        	request.getRequestDispatcher("/views/bookRoom.jsp").include(request, response);
             return;
         }
 
         LocalDate bookingDate = LocalDate.parse(bookingDateStr);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+        String formattedBookingDate = bookingDate.format(dateFormatter);
         int roomId = Integer.parseInt(roomIdStr);
         Room room = roomDAO.getRoomById(roomId);
 
@@ -72,6 +67,7 @@ public class RoomBookingServlet extends HttpServlet {
 
         boolean allSlotsAvailable = true;
         StringBuilder bookedSlots = new StringBuilder();
+        bookingDAO.deleteOldBookings();
 
         for (String slot : selectedSlots) {
             String[] times = slot.split("-");
@@ -90,12 +86,14 @@ public class RoomBookingServlet extends HttpServlet {
                         booking.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")),
                         booking.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))))
                     .collect(Collectors.joining(", "));
-
+                
+                
+                
                 String errorMessage = String.format(
                     "Slot %s is already booked by user %s. All slots booked by this user on %s: %s",
                     slot,
                     user.getUsername(),
-                    bookingDate,
+                    formattedBookingDate,
                     userBookedSlots
                 );
                 request.setAttribute("errorMessage", errorMessage);
@@ -111,15 +109,18 @@ public class RoomBookingServlet extends HttpServlet {
                 String[] times = slot.split("-");
                 LocalDateTime startDateTime = LocalDateTime.of(bookingDate, LocalTime.parse(times[0]));
                 LocalDateTime endDateTime = LocalDateTime.of(bookingDate, LocalTime.parse(times[1]));
-                bookingDAO.bookSlot(roomId, bookingDate, startDateTime, endDateTime, userId);
+                bookingDAO.bookSlot(roomId, bookingDate, startDateTime, endDateTime, userId, email);
             }
 
-            // Send confirmation emails
-//            sendConfirmationEmail(email, room.getRoomName(), bookingDate, bookedSlots.toString());
-//            sendAdminNotificationEmail(room.getRoomName(), bookingDate, bookedSlots.toString(), email);
+             //Send confirmation emails
+            mailUtil.sendConfirmationEmail(email, room.getRoomName(), formattedBookingDate, bookedSlots.toString());
+            mailUtil.sendAdminNotificationEmail(room.getRoomName(), formattedBookingDate, bookedSlots.toString(), email);
 
-            //response.sendRedirect("/views/bookingConfirmation.jsp");
-            request.getRequestDispatcher("/views/roomBooking.jsp").include(request, response);
+            response.sendRedirect("UserBookingsServlet");
+        }else {
+        	request.setAttribute("errorMessage", "Error while Booking, Please Book Again.");
+            doGet(request, response);
+            return;
         }
     }
 

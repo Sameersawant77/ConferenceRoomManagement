@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Conference Room Management</title>
 </head>
 <body>
 	<h2>Conference Room Management</h2>
