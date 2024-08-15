@@ -83,6 +83,15 @@ public class BookingDAO {
         }
     }
     
+    public List<Booking> getBookingsByDate(LocalDate date) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            String hql = "FROM Booking b WHERE b.bookingDate = :date AND b.status != 'cancelled'";
+            Query<Booking> query = session.createQuery(hql, Booking.class);
+            query.setParameter("date", date);
+            return query.list();
+        }
+    }
+    
     public List<Booking> getUserBookingsForDate(int userId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             String hql = "FROM Booking b WHERE b.userId = :userId AND b.bookingDate = :date AND b.status != 'cancelled'";

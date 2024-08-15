@@ -47,7 +47,7 @@ public class CancelBookingServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookingId = Integer.parseInt(request.getParameter("bookingId"));
         
         boolean cancelled = bookingDAO.cancelBooking(bookingId);

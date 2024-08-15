@@ -41,7 +41,7 @@ public class RoomBookingServlet extends HttpServlet {
         request.getRequestDispatcher("/views/bookRoom.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String bookingDateStr = request.getParameter("bookingDate");
         String roomIdStr = request.getParameter("room");
         String[] selectedSlots = request.getParameterValues("slots");
@@ -80,17 +80,21 @@ public class RoomBookingServlet extends HttpServlet {
                 User user = userDAO.getUserById(existingBooking.getUserId());
 
                 // Get all bookings for this user on this date
-                List<Booking> userBookings = bookingDAO.getUserBookingsForDate(user.getUserId(), bookingDate);
+                List<Booking> userBookings = bookingDAO.getBookingsByDate(bookingDate);
                 String userBookedSlots = userBookings.stream()
-                    .map(booking -> String.format("%s-%s",
-                        booking.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")),
-                        booking.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm"))))
-                    .collect(Collectors.joining(", "));
+                        .map(booking -> {
+                            User bookedUser = userDAO.getUserById(booking.getUserId());
+                            return String.format("%s-%s (Booked by %s)",
+                                booking.getStartTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")),
+                                booking.getEndTime().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm")),
+                                bookedUser != null ? bookedUser.getUsername() : "Unknown");
+                        })
+                        .collect(Collectors.joining(", "));
                 
                 
                 
                 String errorMessage = String.format(
-                    "Slot %s is already booked by user %s. All slots booked by this user on %s: %s",
+                    "Slot %s is already booked by user %s. All slots booked on %s are %s",
                     slot,
                     user.getUsername(),
                     formattedBookingDate,
