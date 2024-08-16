@@ -1,6 +1,5 @@
 package com.ConferenceRoomManagement.Repository;
 
-
 import java.util.List;
 
 import org.hibernate.Session;
@@ -9,7 +8,6 @@ import org.hibernate.Transaction;
 import com.ConferenceRoomManagement.Entities.Room;
 import com.ConferenceRoomManagement.Entities.Room.RoomStatus;
 import com.ConferenceRoomManagement.Utils.HibernateUtil;
-
 
 public class RoomDAO {
 
@@ -27,7 +25,6 @@ public class RoomDAO {
         }
     }
 
-
     public Room getRoomById(int roomId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Room.class, roomId);
@@ -41,50 +38,58 @@ public class RoomDAO {
                                     .uniqueResult();
         }
     }
-    public int addRoom(String roomName,int capacity,String status) {
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		Transaction tx = session.beginTransaction();
-    		Room room = new Room();
-    		room.setRoomName(roomName);
-    		room.setCapacity(capacity);
-    		if(status.equals("active")) {
-    			room.setStatus(RoomStatus.active);
-    		}
-    		else {
-    			room.setStatus(RoomStatus.inactive);
-    		}
-    		session.save(room);
-    		tx.commit();
-    		return 1;
-    	}
+
+    public int addRoom(String roomName, int capacity, String status, String amenities) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            Room room = new Room();
+            room.setRoomName(roomName);
+            room.setCapacity(capacity);
+            if (status.equals("active")) {
+                room.setStatus(RoomStatus.active);
+            } else {
+                room.setStatus(RoomStatus.inactive);
+            }
+            room.setAmenities(amenities); 
+            session.save(room);
+            tx.commit();
+            return 1;
+        }
     }
+
     public int deleteRoom(int roomId) {
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		Transaction tx = session.beginTransaction();
-    		Room r = session.get(Room.class, roomId);
-    		session.delete(r);
-    		tx.commit();
-    		return 1;
-    	}
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            Room r = session.get(Room.class, roomId);
+            if (r != null) {
+                session.delete(r);
+                tx.commit();
+                return 1; 
+            } else {
+                return 0; 
+            }
+        }
     }
-    public int updateRoom(int roomId,String roomName,int capacity,String status) {
-    	try (Session session = HibernateUtil.getSessionFactory().openSession()){
-    		Transaction tx = session.beginTransaction();
-    		System.out.println(roomId);
-    		Room room = session.get(Room.class, roomId);
-    		room.setRoomName(roomName);
-    		room.setCapacity(capacity);
-    		if(status.equals("active")) {
-    			room.setStatus(RoomStatus.active);
-    		}
-    		else {
-    			room.setStatus(RoomStatus.inactive);
-    		}
-    		session.update(room);
-    		tx.commit();
-    		return 1;
-    	}
+
+    public int updateRoom(int roomId, String roomName, int capacity, String status, String amenities) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction tx = session.beginTransaction();
+            Room room = session.get(Room.class, roomId);
+            if (room != null) {
+                room.setRoomName(roomName);
+                room.setCapacity(capacity);
+                if (status.equals("active")) {
+                    room.setStatus(RoomStatus.active);
+                } else {
+                    room.setStatus(RoomStatus.inactive);
+                }
+                room.setAmenities(amenities); 
+                session.update(room);
+                tx.commit();
+                return 1; 
+            } else {
+                return 0; 
+            }
+        }
     }
 }
-
-

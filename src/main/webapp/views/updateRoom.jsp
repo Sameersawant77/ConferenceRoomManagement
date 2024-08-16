@@ -15,7 +15,7 @@
             justify-content: center;
         }
         .form-container {
-        	min-width: 600px;
+            min-width: 600px;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="capacity">Capacity</label>
-                    <input type="text" class="form-control" id="capacity" name="capacity" placeholder="Enter conference capacity ..." value="${r.capacity}" required>
+                    <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Enter conference capacity ..." value="${r.capacity}" required>
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
@@ -43,6 +43,10 @@
                         <option value="active" ${r.status == 'active' ? 'selected' : ''}>Active</option>
                         <option value="inactive" ${r.status == 'inactive' ? 'selected' : ''}>Inactive</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="amenities">Amenities</label>
+                    <input type="text" class="form-control" id="amenities" name="amenities" placeholder="Enter amenities, comma separated" value="${r.amenities}">
                 </div>
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" value="${id}">

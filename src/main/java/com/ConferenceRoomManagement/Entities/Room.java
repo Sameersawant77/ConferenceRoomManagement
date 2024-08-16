@@ -24,6 +24,9 @@ public class Room {
     @Column(name = "capacity", nullable = false)
     private int capacity;
     
+    @Column(name = "amenities")
+    private String amenities;
+    
     public enum RoomStatus {
         active,
         inactive
@@ -35,11 +38,12 @@ public class Room {
 
 	public Room() {}
 
-	public Room(int roomId, String roomName, int capacity, RoomStatus status) {
+	public Room(int roomId, String roomName, int capacity, String amenities, RoomStatus status) {
 		super();
 		this.roomId = roomId;
 		this.roomName = roomName;
 		this.capacity = capacity;
+		this.amenities = amenities;
 		this.status = status;
 	}
 
@@ -74,6 +78,14 @@ public class Room {
 	public void setStatus(RoomStatus status) {
 		this.status = status;
 	}
+	
+	public String getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(String amenities) {
+        this.amenities = amenities;
+    }
 
 }
 

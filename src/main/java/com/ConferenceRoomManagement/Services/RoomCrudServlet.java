@@ -50,28 +50,27 @@ public class RoomCrudServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected synchronized void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String action = request.getParameter("action");
-		if(action.equals("add")) {
-			String name = request.getParameter("name");
-			int capacity = Integer.parseInt(request.getParameter("capacity"));
-			String status = request.getParameter("status");
-			rd.addRoom(name, capacity, status);
-			response.sendRedirect("showRoom");
-		}
-		else if(action.equals("delete")) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			rd.deleteRoom(id);
-			response.sendRedirect("showRoom");
-		}
-		else if(action.equals("update")) {
-			int id = Integer.parseInt(request.getParameter("id"));
-			String name = request.getParameter("name");
-			int capacity = Integer.parseInt(request.getParameter("capacity"));
-			String status = request.getParameter("status");
-			rd.updateRoom(id,name,capacity,status);
-			response.sendRedirect("showRoom");			
-		}
-	}
+        String action = request.getParameter("action");
+        if(action.equals("add")) {
+            String name = request.getParameter("name");
+            int capacity = Integer.parseInt(request.getParameter("capacity"));
+            String status = request.getParameter("status");
+            String amenities = request.getParameter("amenities");  
+            rd.addRoom(name, capacity, status, amenities);
+            response.sendRedirect("showRoom");
+        } else if(action.equals("delete")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            rd.deleteRoom(id);
+            response.sendRedirect("showRoom");
+        } else if(action.equals("update")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String name = request.getParameter("name");
+            int capacity = Integer.parseInt(request.getParameter("capacity"));
+            String status = request.getParameter("status");
+            String amenities = request.getParameter("amenities");  
+            rd.updateRoom(id, name, capacity, status, amenities);
+            response.sendRedirect("showRoom");            
+        }
+    }
 
 }
